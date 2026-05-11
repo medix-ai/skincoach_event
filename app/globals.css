@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background-color: #FAFAF8;
+  color: #1A1A1A;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn-primary {
+  display: block;
+  width: 100%;
+  height: 56px;
+  background-color: #1A1A1A;
+  color: white;
+  border-radius: 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:active {
+  opacity: 0.8;
+}
+
+.btn-secondary {
+  display: block;
+  width: 100%;
+  height: 56px;
+  background-color: white;
+  color: #1A1A1A;
+  border-radius: 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1.5px solid #1A1A1A;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-secondary:active {
+  opacity: 0.8;
+}
