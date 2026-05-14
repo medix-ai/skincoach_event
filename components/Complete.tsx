@@ -6,14 +6,18 @@ interface CompleteProps {
   result: ResultType
 }
 
-const downloadCard = async (no: number, name: string) => {
-  const response = await fetch(`/skincoach_event/cards/${no}.png`)
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
+
+const downloadCard = async (no: number) => {
+  const response = await fetch(`${BASE}/cards/${no}.png`)
   const blob = await response.blob()
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
   link.download = `skincoach_${no}.png`
+  document.body.appendChild(link)
   link.click()
+  document.body.removeChild(link)
   URL.revokeObjectURL(url)
 }
 
@@ -105,7 +109,7 @@ export default function Complete({ result }: CompleteProps) {
       <div style={{ width: '100%', marginBottom: '16px' }}>
         <button
           className="btn-secondary"
-          onClick={() => downloadCard(result.no, result.name)}
+          onClick={() => downloadCard(result.no)}
         >
           카드 저장하기
         </button>

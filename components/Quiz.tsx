@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { quizData } from '@/lib/quiz-data'
 
 interface QuizProps {
@@ -12,16 +12,17 @@ export default function Quiz({ onComplete, onBack }: QuizProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState<string[]>([])
   const [selected, setSelected] = useState<string | null>(null)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const total = quizData.length
   const current = quizData[currentIndex]
-  const progress = ((currentIndex) / total) * 100
+  const progress = (currentIndex / total) * 100
 
   const handleSelect = (label: string) => {
     if (selected) return
     setSelected(label)
 
-    setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       const newAnswers = [...answers, label]
       if (currentIndex + 1 >= total) {
         onComplete(newAnswers)
@@ -29,17 +30,23 @@ export default function Quiz({ onComplete, onBack }: QuizProps) {
         setAnswers(newAnswers)
         setCurrentIndex(currentIndex + 1)
         setSelected(null)
+        window.scrollTo({ top: 0, behavior: 'instant' })
       }
     }, 300)
   }
 
   const handleBack = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+      timerRef.current = null
+    }
+    setSelected(null)
     if (currentIndex === 0) {
       onBack()
     } else {
       setAnswers(answers.slice(0, -1))
       setCurrentIndex(currentIndex - 1)
-      setSelected(null)
+      window.scrollTo({ top: 0, behavior: 'instant' })
     }
   }
 

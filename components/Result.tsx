@@ -7,14 +7,18 @@ interface ResultProps {
   onApply: () => void
 }
 
-const downloadCard = async (no: number, name: string) => {
-  const response = await fetch(`/skincoach_event/cards/${no}.png`)
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
+
+const downloadCard = async (no: number) => {
+  const response = await fetch(`${BASE}/cards/${no}.png`)
   const blob = await response.blob()
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
   link.download = `skincoach_${no}.png`
+  document.body.appendChild(link)
   link.click()
+  document.body.removeChild(link)
   URL.revokeObjectURL(url)
 }
 
@@ -59,7 +63,7 @@ export default function Result({ result, onApply }: ResultProps) {
       <div style={{ marginBottom: '28px' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`/skincoach_event/cards/${result.no}.png`}
+          src={`${BASE}/cards/${result.no}.png`}
           alt={result.name}
           style={{
             width: '100%',
@@ -75,7 +79,7 @@ export default function Result({ result, onApply }: ResultProps) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
         <button
           className="btn-secondary"
-          onClick={() => downloadCard(result.no, result.name)}
+          onClick={() => downloadCard(result.no)}
         >
           카드 저장하기
         </button>
