@@ -8,7 +8,7 @@ interface ResultProps {
 }
 
 const downloadCard = async (no: number, name: string) => {
-  const response = await fetch(`/skincoach-event/cards/${no}.png`)
+  const response = await fetch(`/skincoach_event/cards/${no}.png`)
   const blob = await response.blob()
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
@@ -59,7 +59,7 @@ export default function Result({ result, onApply }: ResultProps) {
       <div style={{ marginBottom: '28px' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`/skincoach-event/cards/${result.no}.png`}
+          src={`/skincoach_event/cards/${result.no}.png`}
           alt={result.name}
           style={{
             width: '100%',

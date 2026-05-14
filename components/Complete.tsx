@@ -7,7 +7,7 @@ interface CompleteProps {
 }
 
 const downloadCard = async (no: number, name: string) => {
-  const response = await fetch(`/skincoach-event/cards/${no}.png`)
+  const response = await fetch(`/skincoach_event/cards/${no}.png`)
   const blob = await response.blob()
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')

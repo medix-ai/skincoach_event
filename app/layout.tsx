@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: '올영 장바구니 성향 테스트 | 스킨코치',
     description: '12문항으로 알아보는 내 스킨케어 장바구니 성향',
-    images: ['/skincoach-event/og.png'],
+    images: ['/skincoach_event/og.png'],
   },
 }
 

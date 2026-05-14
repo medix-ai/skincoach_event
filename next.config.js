@@ -3,7 +3,7 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   images: { unoptimized: true },
-  basePath: '/skincoach-event',
+  basePath: '/skincoach_event',
 }
 
 module.exports = nextConfig
